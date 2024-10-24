@@ -65,7 +65,7 @@ const SideMenu = () => {
         <div key={index}>
           <NavLink
             to={menuItem.path}
-            target={menuItem.text === "Blogs" && "_blank"}
+            // target={menuItem.text === "Blogs" && "_blank"}
             className={({ isActive }) =>
               isActive
                 ? 'relative before:content-[""] before:absolute before:left-0 before:h-full before:w-[10px] before:bg-orange-400 bg-[#FABA1F] text-white px-4 py-2 flex items-center'

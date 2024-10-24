@@ -42,6 +42,22 @@ const Layout = ({ children }) => {
     setOpen(!open);
   }
 
+
+  // useEffect(() => {
+  //   const handleKeydown = (event) => {
+  //     if (event.ctrlKey && event.shiftKey && event.key === 'q') {
+  //       event.preventDefault();
+  //       toggleTheme();
+  //     }
+  //   };
+
+  //   window.addEventListener('keydown', handleKeydown);
+
+  //   return () => {
+  //     window.removeEventListener('keydown', handleKeydown);
+  //   };
+  // }, [theme]);
+
   // <div className="bg-white dark:bg-gray-900 text-black dark:text-white">
 
 
@@ -63,10 +79,10 @@ const Layout = ({ children }) => {
         }`}
       >
         <img
-          src={process.env.PUBLIC_URL + "/Assets/Images/rummy24.png"}
+          src={process.env.PUBLIC_URL + "/Assets/Images/rummyLogo.png"}
           alt="logo"
           className="p-8 mx-auto py-3"
-          style={{ width: "150px" }}
+          style={{ width: "250px" }}
         />
         <div
           className={`${
