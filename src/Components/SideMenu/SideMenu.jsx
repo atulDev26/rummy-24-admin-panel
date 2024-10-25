@@ -1,4 +1,4 @@
-import { IconBuildingBank, IconFingerprint, IconHome, IconId, IconNotebook, IconReportAnalytics, IconUser, IconUserBolt, IconUsersGroup } from "@tabler/icons-react";
+import { IconBuildingBank, IconFingerprint, IconHome, IconId, IconNotebook, IconReportAnalytics, IconShieldChevron, IconUser, IconUsersGroup } from "@tabler/icons-react";
 import React, { useState } from "react";
 import { NavLink } from "react-router-dom";
 
@@ -10,6 +10,11 @@ const SideMenu = () => {
       path: "/dashboard",
       icon: <IconHome />,
       text: "Dashboard",
+    },
+    {
+      path:"/admin-control-center",
+      icon: <IconShieldChevron />,
+      text: "Admin",
     },
     {
       path:"/user",
@@ -41,11 +46,11 @@ const SideMenu = () => {
       icon: <IconUsersGroup />,
       text: "Group Create & manage",
     },
-    {
-      path: "/vip-user",
-      icon: <IconUserBolt />,
-      text: "Vip User",
-    },
+    // {
+    //   path: "/vip-user",
+    //   icon: <IconUserBolt />,
+    //   text: "Vip User",
+    // },
     {
       path: "/unique-id-search",
       icon: <IconId />,

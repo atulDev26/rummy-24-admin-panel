@@ -1,12 +1,15 @@
 import React, { useEffect, useState } from "react";
 import { IconEyeClosed, IconEye } from "@tabler/icons-react";
 import { useNavigate } from "react-router-dom";
-import { loadingShow } from "../../utils/GlobalLoding/gloabalLoading";
+import { loadingHide, loadingShow } from "../../utils/GlobalLoding/gloabalLoading";
+import { postApi } from "../../api/callApi";
+import { urlApi } from "../../api/urlApi";
+import { toast } from "sonner";
 
 const Login = () => {
   const navigate = useNavigate();
   const [passwordVisible, setPasswordVisible] = useState(false);
-  const [email, setEmail] = useState("");
+  const [phone, setPhone] = useState("");
   const [password, setPassword] = useState("");
   const [isFormValid, setIsFormValid] = useState(false);
 
@@ -16,20 +19,27 @@ const Login = () => {
 
   useEffect(() => {
     const isValidForm =
-      email !== "" && isValidEmail(email) && password.length >= 6;
+    phone !== "" && isValidPhoneNumber(phone) && password.length >= 6;
     setIsFormValid(isValidForm);
-  }, [email, password]);
+  }, [phone, password]);
 
-  const handleFormSubmit = (e) => {
+  const handleFormSubmit = async(e) => {
     e.preventDefault();
-    console.log(e);
-    // loadingShow();
     let inputValues = {
-      email: e.target.email.value,
+      mobile: e.target.phone.value,
       password: e.target.password.value,
     };
-    navigate("/dashboard",{replace: true})
-    console.log(inputValues);
+    loadingShow();
+    let resp = await postApi(urlApi?.login,inputValues); 
+    console.log('resp',resp);
+    
+    loadingHide();
+    if(resp.responseCode === 200 ){
+      localStorage.setItem("userData", JSON.stringify(resp.data));
+      navigate("/dashboard",{replace: true})
+    }else{
+      toast.error(resp.message);
+    }
   };
 
   const handleKeyDown = (e) => {
@@ -37,8 +47,9 @@ const Login = () => {
       e.preventDefault();
     }
   };
-  const isValidEmail = (email) => {
-    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+
+  const isValidPhoneNumber = (phone) => {
+    return /^\d{10}$/.test(phone);
   };
 
   return (
@@ -70,9 +81,11 @@ const Login = () => {
                 Email
               </label>
               <input
-                id="email"
-                type="email"
-                onChange={(e) => setEmail(e.target.value)}
+                id="phone"
+                type="tel"
+                maxLength={10}
+                onKeyDown={handleKeyDown}
+                onChange={(e) => setPhone(e.target.value)}
                 className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-[#FABA1F]"
               />
             </div>

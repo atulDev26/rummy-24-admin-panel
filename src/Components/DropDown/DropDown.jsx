@@ -20,7 +20,7 @@ const DropDown = ({ options, reset, defaultOption, onclick }) => {
     onclick(option);
   }
   return (
-    <div className="relative" ref={menuRef}>
+    <div className="relative " ref={menuRef}>
       <button
         className="bg-[#FABA1F] p-2 rounded-3xl min-w-[80px] text-white"
         onClick={() => {
